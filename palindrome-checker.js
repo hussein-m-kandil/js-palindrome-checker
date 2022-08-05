@@ -27,7 +27,7 @@ function palindrome(str) {
     }
 
     // Palindrome checking
-    if (strFilterd == strFilterdReversed) {
+    if (strFilterd == strFilterdReversed && strFilterd != "") {
         return true;
     } else {
         return false;
@@ -44,6 +44,32 @@ function palindrome(str) {
 // console.log(palindrome("five|\_/|four"), `should be flase`);
 // console.log(palindrome("1 eye for of 1 eye."), `should be flase`);
 
+addEventListener("submit", function(e) {
+    e.preventDefault();
 
+    // Get the submitter button
+    let submitBtn = e.submitter;
+    submitBtn.textContent = "Checking...";
+    submitBtn.disabled = true;
+
+    let word = this.document.getElementById(submitBtn.value).value;
+
+    // Clean the result just in case it is not clear
+    let result = this.document.getElementById("result");
+    result.textContent = "";
+
+    // Set some time of delay
+    this.setTimeout(function() {
+        if (palindrome(word)) {
+            result.setAttribute("class", "mx-auto mt-3 fs-1 fw-light text-success text-center");
+            result.textContent = "True";
+        } else {
+            result.setAttribute("class", "mx-auto mt-3 fs-1 fw-light text-danger text-center");
+            result.textContent = "False";
+        }
+        submitBtn.textContent = "Is Palindrome?";
+        submitBtn.disabled = false;
+    }, 1000);
+});
 
 
